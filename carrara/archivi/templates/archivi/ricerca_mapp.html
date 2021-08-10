@@ -1,0 +1,29 @@
+{% extends 'archivi/base.html' %}
+
+    {% block content %}
+<div class="container">
+<h4>Ricerca    per    particella</h4>
+    <p>
+        
+         Vengono cercate tutte le particelle che comprendono il Fg ed il Mappale :<br> es. fg 12 map 41 trova fg 112... 121... e mappali 141... 41... 411... etc etc
+        
+    </p>
+     <div class="container  border" style="font-size:0.9em;">
+         <form name = "MappaleForm" action = "{% url 'pratica_list_mapp' %}" 
+             method = "GET" >
+            <div class="row" style="padding:10px;">
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" required autofocus name="fg" placeholder="foglio... ">
+                </div>
+                <div class="col-sm-2">              
+                    <input type="text" class="form-control" name="mapp" required placeholder="mappale... ">
+                </div>
+                <div class="col-sm-4">
+                 <input type="submit" class="btn btn-outline-success btn-sm" name="cerca" value="cerca"> 
+                </div> 
+            </div>  
+         </form>
+     </div>
+</div>
+    {% endblock %}
+    

@@ -1,0 +1,122 @@
+{% extends 'archivi/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+	{% if pratiche %}
+    	<table class="table table-striped" style="width: 100%;" >
+			  <thead class="table table-striped">
+			    <tr>
+			      <th style="vertical-align: top;" scope="col">#</th>
+			      <th style="vertical-align: top;" scope="col">origine</th>
+				  <th style="vertical-align: top;" scope="col">tipo / ubicazione</th>
+				  <th style="vertical-align: top;" scope="col">prot.gen. / data </th>
+				  <th style="vertical-align: top;" scope="col">
+				  {% if user.is_authenticated %}
+				  nominativo / oggetto
+				  {% else %}
+				  oggetto
+				  {% endif %}
+				  
+				  </th>
+			      
+			      <th style="vertical-align: top;" scope="col">foglio / mappale</th>
+			      
+			      <th style="vertical-align: top;" scope="col">tecnico/destinazione</th>
+			      <th style="vertical-align: top;" scope="col">	</th>
+			      <th style="vertical-align: top;" scope="col">	</th>
+
+
+
+			      
+			      
+			    </tr>
+			  </thead>
+
+			  your IP -> {{ ip_address }}
+	       {% for post in pratiche %}
+
+
+	       	<tbody>
+			    <tr>
+			      <th scope="row">
+			      	{{ forloop.counter }}
+			      </th>
+			      <td scope="row">
+			      	{{ post.origine | lower}}
+			      </td>
+			      <td scope="row">
+			      	{{ post.tipo |lower}}<br> 
+			      	{% if post.ubicazione %}
+			      	<span style="vertical-align:bottom;">
+			      		<a  href="https://nominatim.openstreetmap.org/ui/search.html?q= carrara+{{post.ubicazione |lower}}"    target="self"> <img src="https://www.openstreetmap.org/assets/osm_logo-d4979005d8a03d67bbf051b4e7e6ef1b26c6a34a5cd1b65908e2947c360ca391.svg" title="vedi in OpenStreetMap" width="18px"> {{ post.ubicazione |title }} 
+			      	</a> 
+			      	</span>
+			      	{% endif %}
+			      </td>
+			      <td scope="row">
+			      	{{ post.prot_gen }}
+			      <br>
+			      	{{ post.data_prot_gen | date:'d/m/Y' }}
+			      </td>
+			      <td >
+			      	{% if user.is_authenticated %}
+			      	<span style="font-size:14px">
+			      		<b>
+			      		{% if post.richiedente %}
+			      		{{ post.richiedente | title  }}
+			      		{% else%}
+			      		<p>no name!</p>
+			      		{% endif %}
+
+			      		</b>
+			      	</span> 
+			      		
+			      		{{ post.cod_fisc}}
+			      	{% else %}
+			      	<p>... omissis...!</p>
+			   			<br>
+			      	
+			   		{% endif %}
+			      	<span style="vertical-align:bottom;">
+			      		{{ post.oggetto | lower }}
+			      	</span>
+			      </td>
+			     
+			      <td scope="row">
+			      	{{ post.fg }}<br>{{ post.mapp }}
+			      </td>
+			      <td scope="row">
+			      	{{ post.tecnico | title}}
+			      </td>
+		      	  <td scope="row">
+
+		      	  	{% if user.is_authenticated %}
+		      	  			
+		      	  			<p><a href="{% url 'update_pratica' pk=post.pk  %}" class="btn btn-outline-success btn-sm">edita</a>
+		      	  			</p>
+		      	  		
+		      	  	{% endif %}
+		      	  </td>
+		      	  <td scope="row">
+		      	  	<p>
+		      	  		<a href="{% url 'pratica_detail' pk=post.pk %}" class="btn btn-outline-success btn-sm">
+		      	  			dettagli
+		      	  		</a>
+		      	  	</p>
+		      	  </td>
+			    </tr>
+			    
+			  </tbody>
+	 
+			{% endfor %}
+		</table>
+		{% else %}
+			<p>Nessun risultato </p>
+		{% endif %}
+</div>
+{% endblock %}
+    
+
+
+
+   

@@ -1,0 +1,14 @@
+{% extends 'archivi/base.html' %}
+
+{% block content %}
+<div class="container">
+	<p>
+
+		{% if messaggio %}
+			{{ messaggio }}
+		{% endif %}
+		your IP is {{ ip_address 	}}
+	</p>
+</div>
+{% endblock %}
+		

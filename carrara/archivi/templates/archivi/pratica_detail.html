@@ -1,0 +1,126 @@
+  {% extends 'archivi/base.html' %}
+
+{% block content %}
+<div class="container">
+ 
+    <div class="col-sm-12" >
+      <h5>Dettaglio</h5>
+    </div>
+    <form method="POST" >
+      <div class="row" style="text-align:left;">
+        <div class="col-sm-2 " >
+          <input type=button class="btn btn-outline-success btn-sm" value="Indietro" onClick="javascript:history.go(-1);">
+        </div>
+      
+        <div class="col-sm-2 offset-8" style="text-align:center;">
+            <a href="{% url 'pdf_pratica' pk=pratica.pk %}" class="btn btn-outline-danger btn-sm"> Scheda PDF </a>
+              
+        </div>
+        
+        
+  </div>
+</div>
+<div class="container p-3 my-3 border" style="font-size:12px;">
+     
+{% if user.is_authenticated %}
+
+    <div class="row">
+      <div class="col-sm-4">
+        <h4><b style="color:red;">{{ pratica.origine}}</b></h4>
+      </div>
+      <div class="col-sm-8">
+          <h4>{{ pratica.richiedente | upper }}</h4>
+      </div>
+    </div>
+    <br>
+
+    
+    <div class="row">
+      <div class="col-sm-2">
+         <span style="color:grey;">cod. fiscale</span><br>{{ pratica.cod_fisc }}
+      </div>
+      <div class="col-sm-2">
+          <span style="color:grey;">luogo di nascita</span><br>{{ pratica.l_nasc | title }}
+      </div>
+      <div class="col-sm-2">
+          <span style="color:grey;">data</span><br>{{ pratica.d_nasc }}
+      </div>
+      <div class="col-sm-2">
+         <span style="color:grey;">città</span><br>{{ pratica.citta }}
+      </div>
+      <div class="col-sm-4">
+         <span style="color:grey;">residenza</span><br>{{ pratica.residenza }}
+      </div>
+    </div>
+{% else %}
+  <div class="row">
+    <div class="col-sm-12">
+      <h4><b style="color:red;">{{ pratica.origine}}</b></h4>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+
+  </div>
+   <br>
+{% endif %}
+    <br>
+
+    <div class="row">
+      
+      <div class="col-sm-4">
+        <span style="color:grey;">ubicazione   </span><a  href="https://nominatim.openstreetmap.org/ui/search.html?q= carrara+{{pratica.ubicazione |lower}}"  title="individua su OpenStreetMap"  target="self"> <img src="https://www.openstreetmap.org/assets/osm_logo-d4979005d8a03d67bbf051b4e7e6ef1b26c6a34a5cd1b65908e2947c360ca391.svg" width="18px"></a><br>{{ pratica.ubicazione | title }}
+          
+      </div>
+      <div class="col-sm-4">
+      <span style="color:grey;">Tipo di pratica</span><br>{{ pratica.tipo | upper}}</p>
+      </div>
+      <div class="col-sm-2">
+        <span style="color:grey;">prot gen</span> <br>{{ pratica.prot_gen }}
+      </div>
+      <div class="col-sm-2">
+        <span style="color:grey;">data</span> <br> {{ pratica.data_prot_gen|date:'d/m/Y' }}
+      </div>
+      
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-sm-2">
+       <span style="color:grey;">prot urb / suap</span><br>{{ pratica.prot_urb }}
+      </div>
+      <div class="col-sm-2">
+       <span style="color:grey;">istruttoria</span> <br>{{ pratica.istruttoria }}
+      </div>
+      <div class="col-sm-2">
+        <span style="color:grey;">atto </span><br>{{ pratica.num_atto }} {{ pratica.atto }}
+      </div>
+      <div class="col-sm-2">
+        <span style="color:grey;">data atto </span><br>{{ pratica.data_atto | date:'d/m/Y'}}
+      </div>
+      <div class="col-sm-2">
+       <span style="color:grey;">posizione in archivio</span> <br> {{ pratica.pos }}
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-sm-6">
+       <span style="color:grey;">oggetto</span><br> {{ pratica.oggetto | lower}}
+      </div>
+      <div class="col-sm-2">
+       <span style="color:grey;">foglio</span><br>{{ pratica.fg }}
+      </div>
+      <div class="col-sm-4">
+       <span style="color:grey;">mappali</span><br>{{ pratica.mapp }}
+      </div>
+    </form>
+    </div>
+
+    <br><br>
+      
+   
+</div>
+
+{% endblock %}
+		

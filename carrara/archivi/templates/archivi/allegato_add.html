@@ -1,0 +1,38 @@
+{% extends 'archivi/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <div class="container">
+    
+    <h5>Aggiungi pratica</h5>
+    {{submitted}}
+    <form method="POST" action="../../../archivi/allegato_add/{{ pratica }}" enctype="multipart/form-data">
+      <div class="container p-2 my-2 border" style="font-size:0.9em;">
+        {% csrf_token %}
+
+         <p>{{submitted}}</p>  
+          <div class="form-row" >
+            <div class="form-group col-md-6 mb-0" >
+              <label>nomina il file</label>
+                <input class="form-group col-md-6 mb-0" type="text" autofocus name="nome">
+            </div>
+          </div>
+              <br>
+          <div class="form-row" >
+            <div class="form-group col-md-6 mb-0" >
+              <label>documento</label>
+              <input class="btn btn-outline-success btn-sm" type="file" name="doc">
+            </div>
+          </div>
+              <br>
+          <div class="form-row" >
+            <div class="form-group col-md-6 mb-0" >
+              <input class="form-group col-md-6 mb-0" type="number"  name="pratica" value="{{ pk }}"><br>
+              <button class="btn btn-outline-success btn-sm" type="submit">carica</button>
+            </div>
+          </div>
+      </div>
+    </form>
+    
+  </div>
+{% endblock %}

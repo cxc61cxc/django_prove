@@ -1,0 +1,75 @@
+    <div >
+<div class="form-row">
+  <nav style="height: 70px;"  class="navbar navbar-expand-sm  navbar-dark bg-dark fixed-top  ">
+    <div class="col-sm-1" style="vertical-align: bottom;">
+      <a class="btn btn-danger btn-sm" href="../../../">Home</a>
+    </div>
+    
+    <div class="col-sm-2" style="vertical-align: bottom;">
+        <div class="dropdown">
+          <button class="btn btn-success btn-sm dropdown-toggle" type="button" title="Cerca in funzione delle scelte..." id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ricerca
+          </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="../../../archivi/ricerca_mapp">Ricerca per particella</a>
+                {% if user.is_authenticated %}
+              <a class="dropdown-item" href="../../../archivi/ricerca_nome">Ricerca per nominativo</a>
+                {% endif %}
+              <a class="dropdown-item" href="../../../archivi/ricerca_indirizzo">Ricerca per ubicazione</a>
+              <a class="dropdown-item" href="../../../archivi/ricerca_atto">Ricerca per atto</a>
+          </div>
+        </div>
+    </div>
+    <div class="col-sm-1" style="vertical-align: bottom;">
+      <a class="btn btn-success btn-sm" title="Invia un messaggio email allo staff!" href="../../../mailer/">Email</a>
+    </div>
+    <div class="col-sm-2" style="vertical-align: bottom;">
+      {% if user.is_authenticated %}
+        <a class="btn btn-success btn-sm" title="Aggiungi una nuova pratica...se abilitato!" href="{% url 'pratica_add'   %}">Nuova pratica</a>
+      {% endif %}
+    </div>
+    
+    <div class="col-sm-4   " style="color: yellow;vertical-align: bottom; text-align:right;padding-top:5px;">
+      
+     
+      {% if messaggio %}
+
+        <p style="vertical-align:top; font-size: 9px;">
+           <p>
+              {{ messaggio }}
+          
+                    {% if pratiche|length == 1 %}
+                    visualizzata {{ pratiche|length}} pratica
+                    {% else %}
+                    visualizzate  {{ pratiche|length}} pratiche (max = 200)</small></p>
+                    {% endif %}
+                    
+      {% else %}
+                </p> 
+      {% endif %}
+        <p style="color: yellow;">
+            <a href="© OpenStreetMap contributors" target="self">© OpenStreetMap contributors - Nominatim</a>
+          </p>
+              
+        </p>
+    </div>
+    <div class="col-sm-2" style="color: yellow;vertical-align: bottom; text-align:right;padding-top:10px;">
+      {% if user.is_authenticated %}
+        <div class="dropdown">
+            <button class="btn btn-outline-success btn-sm dropdown-toggle" title="Gestisci il tuo profilo..." type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              
+                {{user.username | upper}}
+              
+            </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{% url 'logout' %}">Esci !</a>
+                <a class="dropdown-item" href="{% url 'password_reset' %}">cambia pass</a>
+              </div> 
+        </div>
+        {% else %}
+                <a class="btn btn-success btn-sm" title="accesso consentito ai soli registrati!", href="{% url 'login' %}">Log In</a>      
+        {% endif %}
+    </div>  
+
+  </nav>
+</div>
+</div>

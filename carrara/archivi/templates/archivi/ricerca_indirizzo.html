@@ -1,0 +1,31 @@
+{% extends 'archivi/base.html' %}
+
+    {% block content %}
+<div class="container">
+     <h4>Ricerca per indirizzo</h4>
+     
+        <p>inserire solo parte del nome dell'indirizzo (NON inserire : via... piazza... vicolo... ) ed il civico (81a... 36bis... 21).<br>Entrambi i campi sono obbligatori!</p>
+    <div class="container  border" style="font-size:0.9em;">
+
+         <form name = "IndirizzoForm" action = "{% url 'pratica_list_indirizzo' %}" 
+             method = "POST" >
+             {% csrf_token %}
+            <div class="row" style="padding: 10px;">
+                <div class="col-sm-4">
+                     
+                     <input type="text" class="form-control" size="50"  required autofocus name="ubicazione" placeholder="nome della via... ">
+                </div>
+                <div class="col-sm-2">
+
+                    
+                     <input type="text" size="12"  class="form-control" required name="civico" placeholder="...civico.">
+                </div>
+                <div class="col-sm-2">
+                    <input type="submit" class="btn btn-outline-success btn-sm"name="cerca" value="cerca">    
+                </div>
+            </div> 
+         </form>
+     </div>
+</div>
+    {% endblock %}
+    

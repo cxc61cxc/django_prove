@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+       <title>Comune di Carrara : Richiesta di accesso agli atti</title>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+</head>
+
+<body >
+<div class="container ">
+  <br><br>
+  <p>{% now () %}</p>
+
+    <br><br>
+  <div class="container border" >
+    <div class="jumbotron jumbotron-fluid">
+      <h3>Comune di Carrara : Richiesta di accesso agli atti</h3>
+
+          <div class="row">
+            
+               {% if pratica.richiedente %}
+                <h5>Nominativo : {{ pratica.richiedente | upper }}</h5>
+                {% else %}
+                 <h5>Nominativo : No name !</h5>
+                 {% endif %}
+                <p>luogo di nascita : {{ pratica.l_nasc }}
+                  <br>
+                data di nascita : {{ pratica.d_nasc }}
+                  <br>
+                cod fisc : {{ pratica.cod_fisc | upper }}
+                  </p>
+          
+          <h5>Your IP is {{ ip_address }}</h5>
+          <br>
+          </div>
+    </div>  
+          
+        
+
+          <div class="row">
+            <div class="col-sm-4">
+              <strong>origine: </strong> {{ pratica.origine}}
+            </div>
+            <div class="col-sm-4">
+              <strong>ubicazione: </strong> {{ pratica.ubicazione }}
+            </div>
+            <div class="col-sm-4">
+            <strong>Tipo di pratica: </strong> {{ pratica.tipo | title}}</p>
+            </div>
+          </div>
+            
+          <div class="row">
+           
+              <strong>prot gen: </strong> {{ pratica.prot_gen }}
+            
+              <strong>data prot gen: </strong> {{ pratica.data_prot_gen|date:'d/m/Y' }}
+            
+           </div>
+           <div class="row">
+              <strong>atto: </strong> {{ pratica.num_atto }} {% if pratica.data_atto %} del {{ pratica.data_atto | date:'d/m/Y'}} {% else %} {% endif %}
+            
+          </div>
+
+          <div class="row">
+            <div class="col-sm-8">
+             <strong>oggetto: </strong> {{ pratica.oggetto | lower}}
+            </div>
+            <div class="col-sm-4">
+             <strong>posizione in archivio: </strong>{{ pratica.pos }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+             <strong>foglio: </strong>{{ pratica.fg }}
+            </div>
+            <div class="col-sm-3">
+             <strong>mappali: </strong>{{ pratica.mapp }}
+            </div>
+            <div class="col-sm-3">
+             <strong>num. atto: </strong>{{ pratica.num_atto }} 
+            </div>
+            <div class="col-sm-3">
+             <strong>istruttoria: </strong>{{ pratica.istruttoria }}
+            </div>
+          </div>
+        <div class="row">
+        {{ pratica.tecnico }}
+      </div>
+    </div>
+
+</div>
+
+</body>
+</html>
